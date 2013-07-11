@@ -87,6 +87,24 @@ class LazyArgumentsPassTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($mailerDefinition->isLazy());
     }
 
+    public function testDoesNotFailWhenServiceIsUndefined()
+    {
+        $definition = new Definition();
+        $definition->setArguments(array(
+            'mailer' => new Reference('mailer')
+        ));
+        $definition->addTag(LazyArgumentsPass::LAZY_ARGUMENT_TAG, array(
+            LazyArgumentsPass::LAZY_ARGUMENT_KEY_ATTRIBUTE => 'mailer'
+        ));
+        $this->container->setDefinition('service', $definition);
+
+        try {
+            $this->lazyArgumentsPass->process($this->container);
+        } catch (\Exception $e) {
+            $this->fail('The compiler pass should not have failed because of a missing service');
+        }
+    }
+
     public function testAlsoWorksWithNumericIndexes()
     {
         $definition = new Definition();

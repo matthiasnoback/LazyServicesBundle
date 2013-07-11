@@ -51,7 +51,12 @@ class LazyArgumentsPass implements CompilerPassInterface
             ));
         }
 
-        $referencedDefinition = $container->findDefinition((string)$argument);
+        $referencedServiceId = (string)$argument;
+        if (!$container->hasDefinition($referencedServiceId) && !$container->hasAlias($referencedServiceId)) {
+            return;
+        }
+
+        $referencedDefinition = $container->findDefinition($referencedServiceId);
 
         $referencedDefinition->setLazy(true);
     }
