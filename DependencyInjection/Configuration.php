@@ -14,7 +14,6 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->arrayNode('lazy_service_ids')
-                    //->defaultValue(array())
                     ->prototype('scalar')
                     ->end()
                 ->end()
