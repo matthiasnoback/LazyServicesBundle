@@ -2,6 +2,8 @@
 
 By Matthias Noback
 
+[![Build Status](https://secure.travis-ci.org/matthiasnoback/LazyServicesBundle.png)](http://travis-ci.org/matthiasnoback/LazyServicesBundle)
+
 ## Installation
 
 Run:
